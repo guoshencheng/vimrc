@@ -8,4 +8,4 @@
 
 ### screenshort 
 
-  ![screenshort](./vimrc.png)
+  ![screenshort](http://7u2min.com1.z0.glb.clouddn.com/vimrc.png)
