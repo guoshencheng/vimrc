@@ -105,6 +105,8 @@ filetype plugin indent on    " required
 " configure indent-guides
 set ts=2 sw=2 et
 
+:set spell spelllang=en_us
+
 " Syntastic
 highlight SyntasticErrorSign guifg=red guibg=#555555
 highlight SyntasticWarningSign guifg=yellow guibg=#555555
