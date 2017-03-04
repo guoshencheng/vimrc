@@ -23,8 +23,6 @@ call vundle#begin()
 
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -94,6 +92,8 @@ Plugin 'hotoo/jsgf.vim'
 Plugin 'itspriddle/vim-marked'
 let g:marked_app = "Marked"
 Plugin 'vimcn/node-vimdoc'
+Plugin 'kien/ctrlp.vim'
+Plugin 'dkprice/vim-easygrep'
 Plugin 'pangloss/vim-javascript'
 "========================
 
