@@ -11,7 +11,7 @@ syntax enable
 set nu
 set background=dark
 colorscheme solarized
-set guifont=Monaco:h15     " OSX
+set guifont=Monaco:h13    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
 
@@ -21,13 +21,6 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-Plugin 'user/L9', {'name': 'newL9'}
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -73,7 +66,17 @@ Plugin 'vimcn/snipMate.vim.cnx'
 Plugin 'hotoo/snippets'
 let g:snippets_dir = '~/.vim/bundle/snippets'
 "Plugin 'AutoComplPop'
-Plugin 'ZenCoding.vim'
+" Emmet-vim is html extending from Zencoding
+Plugin 'mattn/emmet-vim'
+" map extend key into ctrl + e
+imap <C-e> <C-y>,
+nmap <C-e> <C-y>,
+" Enable emmet-vim in jsx file & use className 
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 Plugin 'Valloric/YouCompleteMe'
 "======================================
 
@@ -96,6 +99,9 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'pangloss/vim-javascript'
 "========================
+"
+" vim-jsx configuration
+let g:jsx_ext_required = 0
 
 
 " All of your Plugins must be added before the following line
