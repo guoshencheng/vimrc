@@ -9,8 +9,6 @@ let g:solarized_termcolors=256
 set hlsearch
 syntax enable
 set nu
-set background=dark
-colorscheme solarized
 set guifont=Monaco:h13    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
@@ -46,9 +44,20 @@ map <C-n> :NERDTreeToggle<CR>
 Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
 
-" theme
-Plugin 'solarized'
-Plugin 'altercation/vim-colors-solarized'
+" themes
+
+" Plugin 'solarized'
+" Plugin 'altercation/vim-colors-solarized'
+" set background=dark
+" colorscheme solarized
+" Plugin 'ayu-theme/ayu-vim'
+" set termguicolors     " enable true colors support
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+Plugin 'jacoborus/tender.vim'
+syntax enable
+colorscheme tender
+let g:airline_theme = 'tender'
 
 " document ================================
 Plugin 'vimcn/vimcdoc'
