@@ -70,10 +70,10 @@ Plugin 'Townk/vim-autoclose'
 "===================
 
 " == COMPLETION ==========================================================
-Plugin 'msanders/snipmate.vim'
-Plugin 'vimcn/snipMate.vim.cnx'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsSearchPaths=['~/.vim/bundle/vim-snippets/UltiSnips']
 Plugin 'hotoo/snippets'
-let g:snippets_dir = '~/.vim/bundle/snippets'
 "Plugin 'AutoComplPop'
 " Emmet-vim is html extending from Zencoding
 Plugin 'mattn/emmet-vim'
@@ -87,6 +87,7 @@ let g:user_emmet_settings = {
 \  },
 \}
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
 "======================================
 
 " SYNTAX ================================================================={{{
@@ -112,6 +113,15 @@ Plugin 'pangloss/vim-javascript'
 " vim-jsx configuration
 let g:jsx_ext_required = 0
 
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+ 
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
