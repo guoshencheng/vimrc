@@ -13,6 +13,8 @@ set guifont=Monaco:h13    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
 
+" add rtp dir of fzf
+set rtp+=/usr/local/opt/fzf
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -25,7 +27,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Lean & mean status/tabline for vim that's light as air.
 " github: https://github.com/vim-airline/vim-airline
 " https://github.com/vim-airline/vim-airline-themes for more themes
-Plugin 'bling/vim-airline'
+" Plugin 'bling/vim-airline'
 
 " Comment functions so powerful—no comment necessary.
 " /cc comment a line
@@ -37,12 +39,24 @@ let g:NERDRemoveExtraSpaces = 1
 
 "The NERD tree allows you to explore your filesystem and to open files and
 "directories
+"
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize = 40
 " language check
 Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'leafgarland/typescript-vim'
+let g:typescript_indent_disable = 1
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd FileType typescript :set makeprg=tsc
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+
+
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
 
 " themes
 
@@ -98,30 +112,41 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'groenewege/vim-less'
 Plugin 'kchmck/vim-coffee-script'
 "Plugin 'gabrielelana/vim-markdown' " 与 Vimwiki 配合不好。
-Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'velocity.vim'
-Plugin 'hotoo/jsgf.vim'
 Plugin 'itspriddle/vim-marked'
 let g:marked_app = "Marked"
 Plugin 'vimcn/node-vimdoc'
 Plugin 'kien/ctrlp.vim'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_working_path_mode = 'ra'
 Plugin 'dkprice/vim-easygrep'
-Plugin 'pangloss/vim-javascript'
-"========================
-"
+Plugin 'pangloss/vim-javascript', { 'for': ['javascript.jsx', 'javascript'] }
 " vim-jsx configuration
 let g:jsx_ext_required = 0
-
+let g:jsx_pragma_required = 1
+Plugin 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] }
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
- 
+
+Plugin 'posva/vim-vue'
+
+" for wepy
+au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
+
+" for vue
+au BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+Plugin 'tpope/vim-surround'
+Plugin 'junegunn/fzf.vim'
+:inoremap <expr> <c-x><c-f> fzf#complete('fd -t f')
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -136,6 +161,11 @@ set ts=2 sw=2 et
 highlight SyntasticErrorSign guifg=red guibg=#555555
 highlight SyntasticWarningSign guifg=yellow guibg=#555555
 highlight SignColumn guibg=#555555
+
+:map <M-s> :w<kEnter>  
+:imap <M-s> <Esc>:w<kEnter>i 
+
+set backspace=indent,eol,start
 
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
