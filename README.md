@@ -1,11 +1,24 @@
-# my custom vim config
+# Guoshencheng's vimrc
 
-### depence [Vundle](https://github.com/VundleVim/Vundle.vim)
+> it's my custom vimrc. vimrc is a configration file to control your vim. here is my open source verion.
 
-### install 
+[中文版本](./README_zhCN.md)
 
-  `make install` or `make` to install
+### dependency
 
-### screenshort 
+- [vundle](https://github.com/VundleVim/Vundle.vim) - it is a good vim plugin manager
+- [fzf](https://github.com/junegunn/fzf) fuzzy search tool. I loved it to crazy!
+- [fd](https://github.com/sharkdp/fd) a good replace of mac origin find
 
-  ![screenshort](http://7u2min.com1.z0.glb.clouddn.com/vimrc.png)
+### install
+
+- install vundle
+- install fzf
+- install fd
+- clone this repository
+- cd to this repository
+- exec `sh ./restore.sh`
+- exec `vim ~/.vimrc`
+- exec `:PluginInstall` and wating download 
+- install YCM as [doc](https://github.com/Valloric/YouCompleteMe#installation)
+- enjoy your self 
