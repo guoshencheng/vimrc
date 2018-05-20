@@ -1,6 +1,6 @@
-#my custom vim config
+# my custom vim config
 
-###depence [Vundle](https://github.com/VundleVim/Vundle.vim)
+### depence [Vundle](https://github.com/VundleVim/Vundle.vim)
 
 ### install 
 
