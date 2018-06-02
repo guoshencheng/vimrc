@@ -19,7 +19,7 @@ let g:solarized_termcolors=256
 set hlsearch
 syntax enable
 set nu
-set guifont=Monaco:h15    " OSX
+set guifont=Monaco:h14    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
 
