@@ -1,5 +1,15 @@
 set nocompatible              " be iMproved, required
 
+if has('python3')
+  command! -nargs=1 Py py3 <args>
+  set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.6/Python
+  set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.6
+else
+  command! -nargs=1 Py py <args>
+  set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
+  set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
+endif
+
 filetype plugin on
 filetype indent on
 syntax on
@@ -9,7 +19,7 @@ let g:solarized_termcolors=256
 set hlsearch
 syntax enable
 set nu
-set guifont=Monaco:h13    " OSX
+set guifont=Monaco:h15    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
 
@@ -27,7 +37,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Lean & mean status/tabline for vim that's light as air.
 " github: https://github.com/vim-airline/vim-airline
 " https://github.com/vim-airline/vim-airline-themes for more themes
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
+
+Plugin 'octref/RootIgnore'
 
 " Comment functions so powerful—no comment necessary.
 " /cc comment a line
@@ -43,17 +55,24 @@ let g:NERDRemoveExtraSpaces = 1
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize = 40
-" language check
-Plugin 'scrooloose/syntastic'
+let g:NERDTreeWinSize = 30
+let g:NERDTreeRespectWildIgnore = 1
+" language check 高亮检查
+Plugin 'vim-syntastic/syntastic'
+
 Plugin 'marijnh/tern_for_vim'
 Plugin 'leafgarland/typescript-vim'
-let g:typescript_indent_disable = 1
+Plugin 'Quramy/tsuquyomi'
+let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
+" typescript show quick fix automatically
+autocmd QuickFixCmdPost [^l]* nested cwindow
+
+" highlight
 autocmd FileType typescript :set makeprg=tsc
 autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
-
+autocmd BufNewFile,BufRead *.tsx setlocal filetype=typescript
 
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
@@ -132,6 +151,7 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 Plugin 'posva/vim-vue'
+let g:vue_disable_pre_processors = 1
 
 " for wepy
 au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
@@ -166,6 +186,9 @@ highlight SignColumn guibg=#555555
 :imap <M-s> <Esc>:w<kEnter>i 
 
 set backspace=indent,eol,start
+
+" define a command Find for super vimgrep
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case  --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
