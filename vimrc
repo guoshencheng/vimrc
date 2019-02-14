@@ -11,6 +11,7 @@ else
 endif
 
 filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 filetype indent on
 syntax on
 filetype on
@@ -19,6 +20,7 @@ let g:solarized_termcolors=256
 set hlsearch
 syntax enable
 set nu
+set fileencoding=utf-8
 set guifont=Monaco:h14    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
@@ -79,18 +81,13 @@ autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
 
 " themes
 
-" Plugin 'solarized'
-" Plugin 'altercation/vim-colors-solarized'
-" set background=dark
-" colorscheme solarized
-" Plugin 'ayu-theme/ayu-vim'
-" set termguicolors     " enable true colors support
-" let ayucolor="dark"   " for dark version of theme
-" colorscheme ayu
-Plugin 'jacoborus/tender.vim'
+" Plugin 'mhartington/oceanic-next'
+Plugin 'morhetz/gruvbox'
 syntax enable
-colorscheme tender
-let g:airline_theme = 'tender'
+set background=dark    " Setting dark mode
+colorscheme gruvbox
+
+let g:airline_theme ='gruvbox'
 
 " document ================================
 Plugin 'vimcn/vimcdoc'
@@ -114,28 +111,29 @@ Plugin 'mattn/emmet-vim'
 imap <C-e> <C-y>,
 nmap <C-e> <C-y>,
 " Enable emmet-vim in jsx file & use className 
+"
 let g:user_emmet_settings = {
-\  'javascript' : {
+\  'javascript.jsx' : {
 \      'extends' : 'jsx',
 \  },
 \}
-Plugin 'Valloric/YouCompleteMe'
+
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 "======================================
+"
+" Plugin 'ryanoasis/vim-devicons'
 
 " SYNTAX ================================================================={{{
-Plugin 'hotoo/vimwiki'
-Plugin 'vimcn/vimwiki.vim.cnx'
-Plugin 'tpope/vim-markdown'
+" Plugin 'hotoo/vimwiki'
+" Plugin 'vimcn/vimwiki.vim.cnx'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'groenewege/vim-less'
 Plugin 'kchmck/vim-coffee-script'
-"Plugin 'gabrielelana/vim-markdown' " 与 Vimwiki 配合不好。
-Plugin 'elzr/vim-json'
+" Plugin 'elzr/vim-json'
 Plugin 'velocity.vim'
-Plugin 'itspriddle/vim-marked'
-let g:marked_app = "Marked"
-Plugin 'vimcn/node-vimdoc'
+" Plugin 'itspriddle/vim-marked'
+" let g:marked_app = "Marked"
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_working_path_mode = 'ra'
@@ -165,6 +163,7 @@ let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 Plugin 'tpope/vim-surround'
+Plugin 'jparise/vim-graphql'
 Plugin 'junegunn/fzf.vim'
 :inoremap <expr> <c-x><c-f> fzf#complete('fd -t f')
 
