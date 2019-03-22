@@ -1,15 +1,5 @@
 set nocompatible              " be iMproved, required
 
-if has('python3')
-  command! -nargs=1 Py py3 <args>
-  set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.6/Python
-  set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.6
-else
-  command! -nargs=1 Py py <args>
-  set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
-  set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
-endif
-
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 filetype indent on
@@ -25,8 +15,6 @@ set guifont=Monaco:h14    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
 
-" add rtp dir of fzf
-set rtp+=/usr/local/opt/fzf
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -42,6 +30,17 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 
 Plugin 'octref/RootIgnore'
+
+" ale configration
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+let g:ale_completion_enabled = 1
+Plugin 'w0rp/ale'
+
+Plugin 'tpope/vim-repeat'
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " Comment functions so powerful—no comment necessary.
 " /cc comment a line
@@ -62,14 +61,13 @@ let g:NERDTreeRespectWildIgnore = 1
 " language check 高亮检查
 Plugin 'vim-syntastic/syntastic'
 
-Plugin 'marijnh/tern_for_vim'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-let g:syntastic_typescript_checkers = ['tslint', 'tsc']
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-" typescript show quick fix automatically
-autocmd QuickFixCmdPost [^l]* nested cwindow
+" Plugin 'Quramy/tsuquyomi'
+" let g:syntastic_typescript_checkers = ['tslint', 'tsc']
+" let g:typescript_compiler_binary = 'tsc'
+" let g:typescript_compiler_options = ''
+" " typescript show quick fix automatically
+" autocmd QuickFixCmdPost [^l]* nested cwindow
 
 " highlight
 autocmd FileType typescript :set makeprg=tsc
@@ -137,15 +135,15 @@ Plugin 'velocity.vim'
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_working_path_mode = 'ra'
-Plugin 'dkprice/vim-easygrep'
+" Plugin 'dkprice/vim-easygrep'
 Plugin 'pangloss/vim-javascript', { 'for': ['javascript.jsx', 'javascript'] }
 " vim-jsx configuration
 let g:jsx_ext_required = 0
 let g:jsx_pragma_required = 1
 Plugin 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] }
 " make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 Plugin 'posva/vim-vue'
@@ -164,8 +162,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 Plugin 'tpope/vim-surround'
 Plugin 'jparise/vim-graphql'
+Plugin 'junegunn/fzf', { 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-:inoremap <expr> <c-x><c-f> fzf#complete('fd -t f')
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
