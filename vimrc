@@ -15,6 +15,8 @@ set guifont=Monaco:h14    " OSX
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 set laststatus=2
 
+" fix the jump issue with fzf and ale https://github.com/junegunn/fzf/issues/1166
+set hidden
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -31,13 +33,19 @@ Plugin 'bling/vim-airline'
 
 Plugin 'octref/RootIgnore'
 
+
+" fix issue https://github.com/w0rp/ale/issues/1700
+set completeopt+=noinsert
 " ale configration
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \}
-let g:ale_completion_enabled = 1
+let g:ale_lint_on_text_changed = 'nerver'
+let g:ale_completion_enabled = 2
 Plugin 'w0rp/ale'
+nmap <C-G> :ALEGoToDefinitionInVSplit<CR>
+nmap <C-B> :ALEFix<CR>
 
 Plugin 'tpope/vim-repeat'
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -113,6 +121,7 @@ nmap <C-e> <C-y>,
 let g:user_emmet_settings = {
 \  'javascript.jsx' : {
 \      'extends' : 'jsx',
+\      'attribute_name': {'for': 'htmlFor', 'class': 'className'},
 \  },
 \}
 
@@ -178,9 +187,6 @@ set ts=2 sw=2 et
 highlight SyntasticErrorSign guifg=red guibg=#555555
 highlight SyntasticWarningSign guifg=yellow guibg=#555555
 highlight SignColumn guibg=#555555
-
-:map <M-s> :w<kEnter>  
-:imap <M-s> <Esc>:w<kEnter>i 
 
 set backspace=indent,eol,start
 
