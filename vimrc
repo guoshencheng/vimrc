@@ -40,14 +40,18 @@ set completeopt+=noinsert
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
+\   'typescript': ['tslint']
 \}
 let g:ale_lint_on_text_changed = 'nerver'
 let g:ale_completion_enabled = 2
+let g:ale_typescript_tslint_use_global = 1
+let g:ale_typescript_tsserver_use_global = 1
 Plugin 'w0rp/ale'
-nmap <C-G> :ALEGoToDefinitionInVSplit<CR>
+nmap gd :ALEGoToDefinition<CR>
+nmap gr :ALEFindReferences<CR>
 nmap <C-B> :ALEFix<CR>
 
-Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-repeat'
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " Comment functions so powerful—no comment necessary.
@@ -70,12 +74,6 @@ let g:NERDTreeRespectWildIgnore = 1
 Plugin 'vim-syntastic/syntastic'
 
 Plugin 'leafgarland/typescript-vim'
-" Plugin 'Quramy/tsuquyomi'
-" let g:syntastic_typescript_checkers = ['tslint', 'tsc']
-" let g:typescript_compiler_binary = 'tsc'
-" let g:typescript_compiler_options = ''
-" " typescript show quick fix automatically
-" autocmd QuickFixCmdPost [^l]* nested cwindow
 
 " highlight
 autocmd FileType typescript :set makeprg=tsc
@@ -98,8 +96,6 @@ let g:airline_theme ='gruvbox'
 " document ================================
 Plugin 'vimcn/vimcdoc'
 "======================'
-
-Plugin 'Townk/vim-autoclose'
 
 " This project is unmaintained
 "" Plugin 'kien/ctrlp.vim'
